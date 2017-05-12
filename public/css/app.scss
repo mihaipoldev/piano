@@ -1,0 +1,41 @@
+body{
+	background-color: #eee;
+}
+
+.piano{
+	font-size: 0;
+
+	.key{
+		position: relative;
+		display: inline-block;
+		vertical-align:top;
+		background-position: left center;
+
+		&.white{
+			background-image: url('../img/white_key.jpg');
+			width: 23px;
+			height: 127px;
+		}
+
+		&.black{
+			background-image: url('../img/black_key.jpg');
+			width: 12px;
+			height: 70px;
+			margin-left: -6px;
+			z-index: 1000;
+		}
+
+		&.active{
+			background-position: center right;
+		}
+
+		&:nth-child(12n + 3),
+		&:nth-child(12n + 5),
+		&:nth-child(12n + 8),
+		&:nth-child(12n + 10),
+		&:nth-child(12n + 12){
+			margin-left: -6px;
+		}
+	}
+}
+

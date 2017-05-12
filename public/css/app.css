@@ -1,0 +1,26 @@
+body {
+  background-color: #eee; }
+
+.piano {
+  font-size: 0; }
+  .piano .key {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    background-position: left center; }
+    .piano .key.white {
+      background-image: url("../img/white_key.jpg");
+      width: 23px;
+      height: 127px; }
+    .piano .key.black {
+      background-image: url("../img/black_key.jpg");
+      width: 12px;
+      height: 70px;
+      margin-left: -6px;
+      z-index: 1000; }
+    .piano .key.active {
+      background-position: center right; }
+    .piano .key:nth-child(12n + 3), .piano .key:nth-child(12n + 5), .piano .key:nth-child(12n + 8), .piano .key:nth-child(12n + 10), .piano .key:nth-child(12n + 12) {
+      margin-left: -6px; }
+
+/*# sourceMappingURL=app.css.map */
