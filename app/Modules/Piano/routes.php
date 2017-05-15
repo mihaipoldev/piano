@@ -1,29 +1,21 @@
 <?php
 
-use App\Modules\Piano\Models\Note;
-use App\Modules\Piano\Models\Scale;
-
-Route::get('/', function () {
-
-	$note = Note::where('number', 1)->first();
-	return view('Piano::index', [
-		'note' => $note,
+Route::group(['namespace' => 'App\Modules\Piano\Controllers'], function() {
+	Route::get('/', [
+		'uses' => 'KeyboardController@index',
+		'as'   => 'index',
 	]);
-})->name('index');
 
-Route::group(['namespace' => 'App\Modules\Piano\Controllers'], function(){
 	Route::get('/keyboard', [
 		'uses' => 'KeyboardController@keyboard',
-		'as' => 'keyboard'
+		'as'   => 'keyboard',
 	]);
 
 	Route::get('/scales-with-notes', [
 		'uses' => 'KeyboardController@scalesWithNotes',
-		'as' => 'scale-with-notes'
+		'as'   => 'scale-with-notes',
 	]);
 });
-
-
 
 
 function majorFormula() {

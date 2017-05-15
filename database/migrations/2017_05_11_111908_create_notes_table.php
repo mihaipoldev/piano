@@ -17,7 +17,7 @@ class CreateNotesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('number');
-	        $table->boolean('is_black')->nullable()->default(false);
+	        $table->string('color');
 	        $table->string('slug')->nullable();
             $table->timestamps();
         });

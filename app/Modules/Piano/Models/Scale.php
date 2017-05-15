@@ -6,17 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Scale extends Model
 {
+	public $type = 'scale';
+
 	public $fillable = [
 		'root',
 		'chord',
 	];
 
-	public function notes(){
+	protected $appends = ['scale'];
+
+	public function notes() {
+		if($this->type == 'chord') {
+			return $this->belongsToMany('App\Modules\Piano\Models\Note', 'scale_note')->where('scale_note.type', 'chord');
+		}
+
 		return $this->belongsToMany('App\Modules\Piano\Models\Note', 'scale_note');
 	}
 
-	public function containNote($note){
-		$result = $this->notes->contains(function($value, $key) use ($note){
+	public function chordNotes() {
+		return $this->belongsToMany('App\Modules\Piano\Models\Note', 'scale_note')->where('scale_note.type', 'chord');
+	}
+
+	public function containNote($note) {
+		$result = $this->notes->contains(function($value, $key) use ($note) {
 			return $value->slug == $note->slug;
 		});
 
@@ -25,6 +37,7 @@ class Scale extends Model
 
 	public function __toString() {
 		$chord = $this->chord == 'maj' ? '' : 'min';
+
 		return $this->root . $chord;
 	}
 

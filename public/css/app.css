@@ -1,25 +1,61 @@
 body {
   background-color: #eee; }
 
+.main-piano-container {
+  background-color: #555;
+  padding: 10px;
+  text-align: center; }
+
+.choose label {
+  color: #eee; }
+
 .piano {
-  font-size: 0; }
+  display: inline-block;
+  background-color: #868990;
+  font-size: 0;
+  margin-bottom: 10px; }
+  .piano.chord .active {
+    background: #e4e063 !important;
+    box-shadow: 0 0 2px #deda5f; }
+    .piano.chord .active.white {
+      height: 120px; }
+    .piano.chord .active.black {
+      border-left: 1px solid #deda5f;
+      border-right: 1px solid #deda5f;
+      border-bottom: 1px solid #deda5f; }
+  .piano.scale .active {
+    background: #5EB8F4 !important;
+    box-shadow: 0 0 2px #4491C5; }
+    .piano.scale .active.white {
+      height: 120px; }
+    .piano.scale .active.black {
+      border-left: 1px solid #4491C5;
+      border-right: 1px solid #4491C5;
+      border-bottom: 1px solid #4491C5; }
   .piano .key {
     position: relative;
     display: inline-block;
     vertical-align: top;
-    background-position: left center; }
+    background-position: left top;
+    color: white; }
     .piano .key.white {
       background-image: url("../img/white_key.jpg");
-      width: 23px;
-      height: 127px; }
+      background-position-x: -1px;
+      width: 21px;
+      height: 124px;
+      text-align: center;
+      padding-top: 100px;
+      font-size: 14px;
+      margin-right: 1px; }
     .piano .key.black {
       background-image: url("../img/black_key.jpg");
       width: 12px;
       height: 70px;
       margin-left: -6px;
-      z-index: 1000; }
-    .piano .key.active {
-      background-position: center right; }
+      z-index: 1000;
+      text-align: center;
+      padding-top: 50px;
+      font-size: 10px; }
     .piano .key:nth-child(12n + 3), .piano .key:nth-child(12n + 5), .piano .key:nth-child(12n + 8), .piano .key:nth-child(12n + 10), .piano .key:nth-child(12n + 12) {
       margin-left: -6px; }
 

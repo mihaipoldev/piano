@@ -10,26 +10,28 @@ use Illuminate\View\View;
 class KeyboardController
 {
 	/**
+	 * Index
+	 *
+	 * @param Request $request
+	 * @return View
+	 */
+	public function index(Request $request){
+		return view('Piano::index');
+	}
+
+	/**
 	 * Keyboard
 	 *
 	 * @param Request $request
 	 * @return View
 	 */
-	public static function keyboard(Request $request){
-		$scale = [];
+	public static function keyboard(Request $request) {
+		$scale = Scale::where('root', $request['root'])
+			->where('chord', $request['chord'])
+			->first();
 
-		switch($request['type']){
-			case 'scale':
-				$scale = Scale::where('root', $request['root'])
-					->where('chord', $request['chord'])
-					->first();
-				break;
-
-			default:
-				// $scale = Scale::where('root', 'C')
-				// 	->where('chord', 'maj')
-				// 	->first();
-				break;
+		if($scale){
+			$scale->type = $request['type'] ? $request['type'] : 'scale';
 		}
 
 		return view('Piano::keyboard', [
@@ -37,44 +39,48 @@ class KeyboardController
 		]);
 	}
 
-	public function scalesWithNotes(Request $request){
+	/**
+	 * Scales that contains notes
+	 *
+	 * @param Request $request
+	 * @return View
+	 */
+	public static function scalesWithNotes(Request $request) {
 		$notesExploded = explode(',', $request['notes']);
 
 		$notes = collect();
-		foreach($notesExploded as $note){
-			$notes->push(Note::find($note));
+		foreach($notesExploded as $note) {
+			if($note != $request['remove-note']) {
+				$notes->push(Note::find($note));
+			}
 		}
 
-		// Scale::find(28)->containNote(Note::where('slug', 'A')->first());
-
 		$scales = [];
-		foreach(Scale::all() as $scale){
-			$ok = true;
+		foreach(Scale::all() as $scale) {
+			$ok = 1;
 
-			echo 'scale: ' . $scale . ' - ';
-
-			foreach($notes as $note){
-				if(!$scale->containNote($note)){
-					echo 'not-contain '.$note.' <br>';
-					$ok = false;
+			foreach($notes as $note) {
+				if(!$scale->containNote($note)) {
+					//					echo 'not-contain '.$note.' <br>';
+					$ok = 0;
 					break;
 				};
-				echo 'contain '.$note.' <br>';
-
-
 			}
 
-			if($ok){
+			if($ok) {
 				$scales[] = $scale;
 			}
 		}
 
-		dump(Scale::all());
-		dump($request['notes']);
+		$newRequest = '';
+		foreach($notes as $index => $note) {
+			$newRequest .= $index ? ',' . $note->id : $note->id;
+		}
 
 		return view('Piano::scales-with-notes', [
-			'notes' => $notes,
-			'scales' => $scales
+			'notes'      => $notes,
+			'newRequest' => $newRequest,
+			'scales'     => $scales,
 		]);
 	}
 }

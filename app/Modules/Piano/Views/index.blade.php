@@ -12,15 +12,31 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
-					<div class="ajax-keyboard">
-						{!! \App\Modules\Piano\Controllers\KeyboardController::keyboard(app('request')) !!}
+					<div class="main-piano-container">
+						<div id="ajax-keyboard">
+							{!! \App\Modules\Piano\Controllers\KeyboardController::keyboard(app('request')) !!}
+						</div>
+
+						<div class="choose">
+							<div>
+								<label>Chord:</label>
+								@foreach(App\Modules\Piano\Models\Note::orderBy('number')->limit(12)->get() as $index => $key)
+									<a class="btn btn-default ajax-btn pianoMainChordBtn" data-target="#ajax-keyboard" data-callback="selectScaleBtn"
+									   data-url="{{ route('keyboard', ['type' => 'chord', 'root' => $key->name, 'chord' => 'maj']) }}">{{ $key->name }}</a>
+								@endforeach
+							</div>
+
+							<div>
+								<label>Scale:</label>
+								@foreach(App\Modules\Piano\Models\Note::orderBy('number')->limit(12)->get() as $index => $key)
+									<a class="btn btn-default ajax-btn pianoMainScaleBtn" data-target="#ajax-keyboard" data-callback="selectScaleBtn"
+									   data-url="{{ route('keyboard', ['type' => 'scale', 'root' => $key->name, 'chord' => 'maj']) }}">{{ $key->name }}</a>
+								@endforeach
+							</div>
+						</div>
 					</div>
 
-					<div class="note-select">
-						@foreach(App\Modules\Piano\Models\Note::orderBy('number')->limit(12)->get() as $index => $key)
-							<span>{{ $key->name }}</span>
-						@endforeach
-					</div>
+
 				</div>
 			</div>
 
@@ -33,11 +49,6 @@
 						</div>
 
 						<div class="panel-body">
-							<div class="choose">
-								@foreach(App\Modules\Piano\Models\Note::orderBy('number')->limit(12)->get() as $index => $key)
-									<a class="btn btn-default" href="{{ route('index', ['type' => 'scale', 'root' => $key->name, 'chord' => 'maj']) }}">{{ $key->name }}</a>
-								@endforeach
-							</div>
 						</div>
 					</div>
 
@@ -47,16 +58,16 @@
 						</div>
 
 						<div class="panel-body">
-							<div class="choose">
-								@foreach(App\Modules\Piano\Models\Note::orderBy('number')->limit(12)->get() as $index => $key)
-									<a class="btn btn-default " href="{{ route('scale-with-notes', ['notes' => request('notes') ? (request('notes') . ',' . $key->id) : $key->id]) }}" data-target="#ajax-show-scales">
-										{{ $key->name }}
-									</a>
-								@endforeach
-							</div>
-
 							<div id="ajax-show-scales">
-
+								<div class="choose">
+									@foreach(App\Modules\Piano\Models\Note::orderBy('number')->limit(12)->get() as $index => $key)
+										<a class="btn btn-default ajax-choose-btn"
+										   data-add-url="{{ route('scale-with-notes', ['notes' => request('notes') ? (request('notes') . ',' . $key->id) : $key->id]) }}"
+										   data-remove-url="{{ route('scale-with-notes', ['notes' => request('notes'), 'remove-note' => $key->id]) }}">
+											{{ $key->name }}
+										</a>
+									@endforeach
+								</div>
 							</div>
 						</div>
 					</div>

@@ -17,6 +17,7 @@ class CreateScaleNoteTable extends Migration
 		    $table->increments('id');
 		    $table->string('scale_id');
 		    $table->string('note_id');
+		    $table->string('type')->nullable();
 		    $table->timestamps();
 	    });
     }

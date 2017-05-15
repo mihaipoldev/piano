@@ -17,6 +17,7 @@ class CreateScalesTable extends Migration
             $table->increments('id');
 	        $table->string('root');
 	        $table->string('chord');
+	        $table->string('slug');
             $table->timestamps();
         });
     }

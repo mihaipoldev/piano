@@ -16,21 +16,41 @@ class ScaleSeeder extends Seeder
 			// major
 			$scale = new Scale();
 			$scale->root = $note->name;
+			$scale->slug = $note->name;
 			$scale->chord = 'maj';
 			$scale->save();
 
 			foreach($this->majorFormula() as $noteFormula) {
-				$scale->notes()->save(Note::where('number', $note->number + $noteFormula)->first());
+				$assocNote = Note::where('number', $note->number + $noteFormula)->first();
+
+				if($noteFormula == 0 || $noteFormula == 4 || $noteFormula == 7){
+					$scale->notes()->save($assocNote, [
+						'type' => 'chord'
+					]);
+				}
+				else{
+					$scale->notes()->save($assocNote);
+				}
 			}
 
 			// minor
 			$scale = new Scale();
 			$scale->root = $note->name;
+			$scale->slug = $note->name;
 			$scale->chord = 'min';
 			$scale->save();
 
 			foreach($this->minorFormula() as $noteFormula) {
-				$scale->notes()->save(Note::where('number', $note->number + $noteFormula)->first());
+				$assocNote = Note::where('number', $note->number + $noteFormula)->first();
+
+				if($noteFormula == 0 || $noteFormula == 3 || $noteFormula == 7){
+					$scale->notes()->save($assocNote, [
+						'type' => 'chord'
+					]);
+				}
+				else{
+					$scale->notes()->save($assocNote);
+				}
 			}
 		}
 	}
