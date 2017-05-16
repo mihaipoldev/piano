@@ -2,52 +2,85 @@ body {
 	background-color: #eee;
 }
 
-.main-piano-container {
-	background-color: #555;
+.note-select {
+}
+
+$blue1: #48558D;
+$blue2: #8495DA;
+$brown: #e0d4cb;
+$green1: #5E8D30;
+$green2: #7DA754;
+
+/* piano app */
+#ajax-piano-app {
+	border: 1px solid #ddd;
 	padding: 10px;
-	text-align: center;
+	display: inline-block;
 }
 
-.choose label {
-	color: #eee;
-}
-
-.piano {
+.keyboard {
 	display: inline-block;
 	background-color: #868990;
 	font-size: 0;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
+	width: 616px;
+	height: 120px;
+
+	&.keyboard-sm {
+		height: 81px;
+		width: 266px;
+
+		.key {
+			&.white {
+				height: 80px;
+				padding-top: 60px;
+				width: 18px;
+				font-size: 11px;
+			}
+			&.black {
+				background-position: -1px bottom;
+				height: 45px;
+				padding-top: 20px;
+				width: 10px;
+				margin-left: -5px;
+				font-size: 8px;
+			}
+
+			&:nth-child(12n + 3),
+			&:nth-child(12n + 5),
+			&:nth-child(12n + 8),
+			&:nth-child(12n + 10),
+			&:nth-child(12n + 12) {
+				margin-left: -5px;
+			}
+		}
+
+	}
 
 	&.chord {
 		.active {
-			background: #e4e063 !important;
-			box-shadow: 0 0 2px #deda5f;
+			background: $green1 !important;
+			box-shadow: 0 0 2px $green2;
 
-			&.white{
+			&.white {
 				height: 120px;
 			}
 
-			&.black{
-				border-left: 1px solid #deda5f;
-				border-right: 1px solid #deda5f;
-				border-bottom: 1px solid #deda5f;
+			&.black {
+				border: 1px solid $green2;
+				border-top: 0;
 			}
 		}
 	}
 
 	&.scale {
 		.active {
-			background: #5EB8F4 !important;
-			box-shadow: 0 0 2px #4491C5;
+			background: $blue1 !important;
+			box-shadow: 0 0 2px $blue2;
 
-			&.white{
-				height: 120px;
-			}
-
-			&.black{
-				border-left: 1px solid #4491C5;
-				border-right: 1px solid #4491C5;
-				border-bottom: 1px solid #4491C5;
+			&.black {
+				border: 1px solid $blue2;
+				border-top: 0;
 			}
 		}
 	}
@@ -63,7 +96,7 @@ body {
 			background-image: url('../img/white_key.jpg');
 			background-position-x: -1px;
 			width: 21px;
-			height: 124px;
+			height: 120px;
 			text-align: center;
 
 			padding-top: 100px;
@@ -93,3 +126,98 @@ body {
 	}
 }
 
+.note-list {
+	background: $brown;
+	box-shadow: 0 0 3px gray;
+	margin-bottom: 20px;
+	border-radius: 2px;
+
+	a {
+		color: #777;
+
+		&:hover {
+			color: #333;
+		}
+	}
+
+	label {
+		width: 76px;
+	}
+
+	.select-note-wrap {
+		position: relative;
+		display: inline-block;
+		height: 30px;
+		line-height: 30px;
+
+		.select-note {
+			display: inline-block;
+			width: 45px;
+			text-align: center;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+		.select-chord-wrap {
+			position: absolute;
+			top: 30px;
+			left: 0;
+			z-index: 100;
+			display: none;
+			background: $brown;
+
+			.select-chord {
+				display: block;
+				text-align: center;
+				width: 45px;
+				height: 20px;
+				line-height: 20px;
+				text-decoration: none;
+				cursor: pointer;
+				font-size: 11px;
+			}
+		}
+
+		&:hover {
+			background: darken($green2, 2);
+
+			a {
+				color: #eee !important;
+			}
+
+			.select-chord-wrap {
+				display: block;
+				background: darken($green2, 3);
+			}
+		}
+	}
+}
+
+.choose{
+	margin-bottom: 20px;
+}
+
+.scales-with-notes {
+
+	.item{
+		padding: 5px 30px;
+		box-shadow: 0 0 3px gray;
+		margin-bottom: 10px;
+
+		h4 {
+			width: 120px;
+			margin: 0;
+			float: left;
+			display: inline-block;
+			line-height: 80px;
+			height: 80px;
+		}
+
+		.keyboard{
+			float: left;
+			display: inline-block;
+			margin: 0;
+		}
+	}
+
+}

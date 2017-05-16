@@ -57,7 +57,7 @@ $( function () {
 });
 
 var selectScaleBtn = function($this){
-	$('.pianoMainScaleBtn.active').removeClass('active')
+	$('.choose .ajax-btn.active').removeClass('active');
 	$this.addClass('active');
 };
 

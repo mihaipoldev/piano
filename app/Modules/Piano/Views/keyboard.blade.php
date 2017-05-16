@@ -1,17 +1,54 @@
-@if($scale)
-	<div class="piano clearfix {{ $scale->type }}">
-		@foreach(pianoNotes() as $note)
+<div class="keyboard clearfix {{ $scale ? $scale->type : '' }}">
+	@foreach(pianoNotes() as $note)
+		@if($scale)
 			@if($scale->notes->contains($note))
 				<span class="key {{ $note->color }} active">{{ $note->slug }}</span>
 			@else
 				<span class="key {{ $note->color }}"></span>
 			@endif
-		@endforeach
-	</div>
-@else
-	<div class="piano clearfix">
-		@foreach(pianoNotes() as $note)
+		@else
 			<span class="key {{ $note->color }}"></span>
-		@endforeach
+		@endif
+	@endforeach
+</div>
+
+<div class="choose">
+	@foreach(chordsNames() as $chord)
+		<div class="note-list {{ $chord }}">
+			<label>{{ ucfirst($chord) }}:</label>
+
+			@foreach(App\Modules\Piano\Models\Note::orderBy('number')->limit(12)->get() as $index => $note)
+				<div class="select-note-wrap">
+					<a class="select-note {{ $note->color }} ajax-btn" data-target="#ajax-piano-app" data-callback="selectScaleBtn"
+					   data-url="{{ route('keyboard', ['type' => $chord, 'root' => $note->name, 'chord' => 'maj']) }}">
+						{{ $note->name }}
+					</a>
+
+					<div class="select-chord-wrap">
+						<a class="select-chord {{ $note->color }} ajax-btn" data-target="#ajax-piano-app" data-callback="selectScaleBtn"
+						   data-url="{{ route('keyboard', ['type' => $chord, 'root' => $note->name, 'chord' => 'maj']) }}">
+							{{ $note->name }} <small>Maj</small>
+						</a>
+
+						<a class="select-chord {{ $note->color }} ajax-btn" data-target="#ajax-piano-app" data-callback="selectScaleBtn"
+						   data-url="{{ route('keyboard', ['type' => $chord, 'root' => $note->name, 'chord' => 'min']) }}">
+							{{ $note->name }} <small>Min</small>
+						</a>
+					</div>
+				</div>
+			@endforeach
+		</div>
+	@endforeach
+</div>
+
+@if($scale)
+	<div class="scale-info">
+		<div>
+			<label>{{ ucfirst($scale->type) }}:</label> {{ $scale->root . ' ' . ucfirst($scale->chord) }}
+		</div>
+
+		<div>
+			<label>Notes:</label> {{ $scale->notesToString() }}
+		</div>
 	</div>
 @endif

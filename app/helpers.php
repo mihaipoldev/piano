@@ -22,3 +22,17 @@ function pianoNotes(){
 
 	return $notes;
 }
+
+function pianoNotesSm(){
+	$notes = [];
+
+	foreach(Note::orderBy('number')->get() as $note){
+		$notes[] = $note;
+	}
+
+	return $notes;
+}
+
+function chordsNames(){
+	return ['chord', 'scale'];
+}

@@ -26,8 +26,8 @@ class KeyboardController
 	 * @return View
 	 */
 	public static function keyboard(Request $request) {
-		$scale = Scale::where('root', $request['root'])
-			->where('chord', $request['chord'])
+		$scale = Scale::where('root', $request['root'] ? $request['root'] : 'C')
+			->where('chord', $request['chord'] ? $request['chord'] : 'maj')
 			->first();
 
 		if($scale){
@@ -56,19 +56,21 @@ class KeyboardController
 		}
 
 		$scales = [];
-		foreach(Scale::all() as $scale) {
-			$ok = 1;
+		if($notes->count()){
+			foreach(Scale::all() as $scale) {
+				$ok = 1;
 
-			foreach($notes as $note) {
-				if(!$scale->containNote($note)) {
-					//					echo 'not-contain '.$note.' <br>';
-					$ok = 0;
-					break;
-				};
-			}
+				foreach($notes as $note) {
+					if(!$scale->containNote($note)) {
+						//					echo 'not-contain '.$note.' <br>';
+						$ok = 0;
+						break;
+					};
+				}
 
-			if($ok) {
-				$scales[] = $scale;
+				if($ok) {
+					$scales[] = $scale;
+				}
 			}
 		}
 
