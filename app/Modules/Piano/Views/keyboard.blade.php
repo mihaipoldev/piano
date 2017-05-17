@@ -15,7 +15,7 @@
 <div class="choose">
 	@foreach(chordsNames() as $chord)
 		<div class="note-list {{ $chord }}">
-			<label>{{ ucfirst($chord) }}:</label>
+			<span>{{ ucfirst($chord) }}:</span>
 
 			@foreach(App\Modules\Piano\Models\Note::orderBy('number')->limit(12)->get() as $index => $note)
 				<div class="select-note-wrap">
@@ -44,7 +44,7 @@
 @if($scale)
 	<div class="scale-info">
 		<div>
-			<label>{{ ucfirst($scale->type) }}:</label> {{ $scale->root . ' ' . ucfirst($scale->chord) }}
+			<h4><strong>{{ $scale->root . ' ' . ucfirst($scale->chord) }}</strong></h4>
 		</div>
 
 		<div>

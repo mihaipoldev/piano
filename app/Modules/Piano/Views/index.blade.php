@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 		<link href="{{ asset('libs/bootstrap.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('libs/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	</head>
 
@@ -18,7 +19,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<div id="ajax-piano-app">
+					<h2>Piano Scales</h2>
+
+					<div id="ajax-piano-app" class="clearfix">
 						{!! \App\Modules\Piano\Controllers\KeyboardController::keyboard(app('request')) !!}
 					</div>
 				</div>
@@ -36,6 +39,7 @@
 		</div>
 
 		<script src="{{ asset('libs/jquery-2.1.1.js') }}"></script>
+		<script src="{{ asset('js/utilities.js') }}"></script>
 		<script src="{{ asset('js/app.js') }}"></script>
 
 	</body>

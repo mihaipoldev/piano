@@ -1,30 +1,62 @@
-body {
-	background-color: #eee;
-}
-
-.note-select {
-}
-
 $blue1: #48558D;
 $blue2: #8495DA;
 $brown: #e0d4cb;
 $green1: #5E8D30;
 $green2: #7DA754;
 
+body {
+	background-color: #eee;
+}
+
+header{
+	background: #212121;
+	height: 50px;
+	text-align: center;
+
+	ul{
+		margin: 0;
+		display: inline-block;
+	}
+}
+
+.note-select {
+}
+
 /* piano app */
 #ajax-piano-app {
 	border: 1px solid #ddd;
-	padding: 10px;
+
+	///* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#515151+0,212121+98 */
+	//background: #515151; /* Old browsers */
+	//background: -moz-linear-gradient(top, #515151 0%, #212121 98%); /* FF3.6-15 */
+	//background: -webkit-linear-gradient(top, #515151 0%,#212121 98%); /* Chrome10-25,Safari5.1-6 */
+	//background: linear-gradient(to bottom, #515151 0%,#212121 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	//filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#515151', endColorstr='#212121',GradientType=0 ); /* IE6-9 */
+
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#212121+20,515151+98 */
+	background: #212121; /* Old browsers */
+	background: -moz-linear-gradient(top, #212121 20%, #515151 98%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #212121 20%,#515151 98%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #212121 20%,#515151 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#515151',GradientType=0 ); /* IE6-9 */
+
+	padding: 1px;
+	padding-top: 20px;
 	display: inline-block;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	padding-bottom: 20px;
+
+	color: $brown;
 }
 
 .keyboard {
-	display: inline-block;
 	background-color: #868990;
 	font-size: 0;
 	margin-bottom: 20px;
 	width: 616px;
 	height: 120px;
+	border-top: 2px solid brown;
 
 	&.keyboard-sm {
 		height: 81px;
@@ -127,21 +159,17 @@ $green2: #7DA754;
 }
 
 .note-list {
-	background: $brown;
-	box-shadow: 0 0 3px gray;
-	margin-bottom: 20px;
-	border-radius: 2px;
+	background: #222;
+	//box-shadow: 0 0 3px #222;
+	margin-bottom: 10px;
+	//border-radius: 2px;
 
 	a {
-		color: #777;
+		color: $brown;
 
 		&:hover {
-			color: #333;
+			color: lighten($brown, 1.5);
 		}
-	}
-
-	label {
-		width: 76px;
 	}
 
 	.select-note-wrap {
@@ -152,7 +180,7 @@ $green2: #7DA754;
 
 		.select-note {
 			display: inline-block;
-			width: 45px;
+			width: 41px;
 			text-align: center;
 			text-decoration: none;
 			cursor: pointer;
@@ -179,7 +207,7 @@ $green2: #7DA754;
 		}
 
 		&:hover {
-			background: darken($green2, 2);
+			background: darken(#222, 3);
 
 			a {
 				color: #eee !important;
@@ -187,7 +215,7 @@ $green2: #7DA754;
 
 			.select-chord-wrap {
 				display: block;
-				background: darken($green2, 3);
+				background: darken(#222, 3);
 			}
 		}
 	}
@@ -198,7 +226,6 @@ $green2: #7DA754;
 }
 
 .scales-with-notes {
-
 	.item{
 		padding: 5px 30px;
 		box-shadow: 0 0 3px gray;
