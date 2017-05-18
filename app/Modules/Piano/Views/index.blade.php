@@ -38,6 +38,10 @@
 			</div>
 		</div>
 
+		<footer>
+
+		</footer>
+
 		<script src="{{ asset('libs/jquery-2.1.1.js') }}"></script>
 		<script src="{{ asset('js/utilities.js') }}"></script>
 		<script src="{{ asset('js/app.js') }}"></script>

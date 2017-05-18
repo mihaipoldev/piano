@@ -14,8 +14,27 @@ header{
 	text-align: center;
 
 	ul{
+		list-style: none;
 		margin: 0;
+		padding: 0;
 		display: inline-block;
+		height: 50px;
+		line-height: 50px;
+
+		li{
+			a{
+				font-size: 16px;
+				font-weight: bold;
+				text-decoration: none;
+				color: darken($brown, 10);
+				cursor: pointer;
+
+				&:hover{
+					color: lighten($brown, 3);
+					text-decoration: none;
+				}
+			}
+		}
 	}
 }
 
@@ -25,13 +44,6 @@ header{
 /* piano app */
 #ajax-piano-app {
 	border: 1px solid #ddd;
-
-	///* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#515151+0,212121+98 */
-	//background: #515151; /* Old browsers */
-	//background: -moz-linear-gradient(top, #515151 0%, #212121 98%); /* FF3.6-15 */
-	//background: -webkit-linear-gradient(top, #515151 0%,#212121 98%); /* Chrome10-25,Safari5.1-6 */
-	//background: linear-gradient(to bottom, #515151 0%,#212121 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	//filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#515151', endColorstr='#212121',GradientType=0 ); /* IE6-9 */
 
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#212121+20,515151+98 */
 	background: #212121; /* Old browsers */
@@ -59,6 +71,7 @@ header{
 	border-top: 2px solid brown;
 
 	&.keyboard-sm {
+		border-top: 1px solid brown;
 		height: 81px;
 		width: 266px;
 
@@ -218,6 +231,14 @@ header{
 				background: darken(#222, 3);
 			}
 		}
+
+		&.active {
+			background: darken(#222, 3);
+
+			a {
+				color: #eee !important;
+			}
+		}
 	}
 }
 
@@ -227,12 +248,11 @@ header{
 
 .scales-with-notes {
 	.item{
-		padding: 5px 30px;
+		padding: 5px;
 		box-shadow: 0 0 3px gray;
 		margin-bottom: 10px;
 
 		h4 {
-			width: 120px;
 			margin: 0;
 			float: left;
 			display: inline-block;
@@ -241,10 +261,14 @@ header{
 		}
 
 		.keyboard{
-			float: left;
+			float: right;
 			display: inline-block;
 			margin: 0;
 		}
 	}
 
+}
+
+footer{
+	height: 100px;
 }

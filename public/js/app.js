@@ -28,6 +28,6 @@ $(function() {
 });
 
 var selectScaleBtn = function($this) {
-	$('.choose .ajax-btn.active').removeClass('active');
+	$('#ajax-piano-app .choose .ajax-btn.active').removeClass('active');
 	$this.addClass('active');
 };

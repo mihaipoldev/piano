@@ -18,7 +18,7 @@
 			<span>{{ ucfirst($chord) }}:</span>
 
 			@foreach(App\Modules\Piano\Models\Note::orderBy('number')->limit(12)->get() as $index => $note)
-				<div class="select-note-wrap">
+				<div class="select-note-wrap {{ ($chord == $scale->type and $scale->root == $note->slug) ? 'active' : '' }}">
 					<a class="select-note {{ $note->color }} ajax-btn" data-target="#ajax-piano-app" data-callback="selectScaleBtn"
 					   data-url="{{ route('keyboard', ['type' => $chord, 'root' => $note->name, 'chord' => 'maj']) }}">
 						{{ $note->name }}

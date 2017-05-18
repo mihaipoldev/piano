@@ -16,7 +16,7 @@
 
 <div class="scales-with-notes">
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-8 col-md-offset-2">
 			<div class="row">
 				@foreach($scales as $scale)
 					<div class="col-md-6">
